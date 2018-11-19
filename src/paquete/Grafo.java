@@ -1,21 +1,63 @@
 package paquete;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Grafo {
 
-	private List<Nodo> nodos;
+	private List<Nodo> nodos = new ArrayList<>();
 	private MatrizSimetrica matrizAdyacencia;
+	private String nombreDeGrafo;
+	private int cantidadDeNodos;
+	private int cantidadDeAristas;
+	private double porcentajeAdyacencia;
+	private int gradoMinimo;
+	private int gradoMaximo;
+	private int cantidadDeColoresCorridaActual;
 
 	public Grafo(int cantNodos) {
+		this.cantidadDeNodos = cantNodos;
 		this.matrizAdyacencia = new MatrizSimetrica(cantNodos);
-		this.nodos = new ArrayList<>();
 
 		for (int i = 0; i < cantNodos; i++) {
 			nodos.add(new Nodo(i));
 		}
+	}
+
+	public Grafo(String path) throws FileNotFoundException {
+		File archivo = new File(path);
+		Scanner entrada = new Scanner(archivo);
+		this.nombreDeGrafo = path;
+		this.cantidadDeNodos = entrada.nextInt();
+		this.matrizAdyacencia = new MatrizSimetrica(this.cantidadDeNodos);
+
+		for (int i = 0; i < this.cantidadDeNodos; i++) {
+			this.nodos.add(new Nodo(i));
+		}
+
+		this.cantidadDeAristas = entrada.nextInt();
+		entrada.useLocale(Locale.US);
+		this.porcentajeAdyacencia = entrada.nextDouble();
+		this.gradoMaximo = entrada.nextInt();
+		this.gradoMinimo = entrada.nextInt();
+
+		for (int j = 0; j < this.cantidadDeAristas; j++) {
+			this.matrizAdyacencia.set(entrada.nextInt(), entrada.nextInt(), 1);
+		}
+
+		for (int k = 0; k < this.cantidadDeNodos; k++) {
+			Nodo nodo = this.nodos.get(k);
+			for (int j = 0; j < this.cantidadDeNodos; j++) {
+				if (this.matrizAdyacencia.get(nodo.id, j) == 1) {
+					nodo.grado++;
+				}
+			}
+		}
+		entrada.close();
 	}
 
 	public void setUnion(int nodo1, int nodo2) {
@@ -81,18 +123,17 @@ public class Grafo {
 		}
 		return secuencia;
 	}
-	
+
 	public ArrayList<Integer> calcularWheelsPower() {
 		ArrayList<Integer> secuencia = new ArrayList<>();
 
 		return null;
 	}
-	
+
 	public ArrayList<Integer> calcularMatula() {
 		ArrayList<Integer> secuencia = new ArrayList<>();
 
 		return null;
 	}
-
 
 }

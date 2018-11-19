@@ -1,8 +1,6 @@
 package paquete;
 
-import java.util.List;
 
-import javax.script.Bindings;
 
 public class SalidaColoreo {
 
