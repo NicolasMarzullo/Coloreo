@@ -28,23 +28,19 @@ public class Grafo {
 
 		int cantNodosPintados = 0, colorActual = 1, j;
 		boolean loPuedoPintarDelColorActual;
-		Nodo nodoActual, nodo;
 
-		List<Nodo> nodosColoreados = new ArrayList<>();
-		nodosColoreados.addAll(this.nodos); // Creo un nuevo grafo
+		int[] nodosPintados = new int[this.nodos.size()];
 
 		// Uso algoritmo que colorea todo lo que puede con un color
-		while (cantNodosPintados != nodosColoreados.size()) {
+		while (cantNodosPintados != nodosPintados.length) {
 
 			for (Integer i : secuencia) {
-				nodo = nodosColoreados.get(i);
-				if (nodo.color == 0) { // No quiero que recorra nodos que ya fueron pintados.
+				if (nodosPintados[i] == 0) { // No quiero que recorra nodos que ya fueron pintados.
 					j = 0;
 					loPuedoPintarDelColorActual = true; // Corte de control, la primera vez siempre ingresa.
-					while (j < nodosColoreados.size() && loPuedoPintarDelColorActual) {
-						nodoActual = nodosColoreados.get(j);
-						if (this.matrizAdyacencia.get(nodo.id, nodoActual.id) == 1) {
-							if (nodoActual.color != colorActual) {
+					while (j < nodosPintados.length && loPuedoPintarDelColorActual) {
+						if (this.matrizAdyacencia.get(i, j) == 1) {
+							if (nodosPintados[j] != colorActual) {
 								loPuedoPintarDelColorActual = true;
 							} else {
 								loPuedoPintarDelColorActual = false;
@@ -57,7 +53,7 @@ public class Grafo {
 				}
 
 				if (loPuedoPintarDelColorActual) {
-					nodosColoreados.get(nodo.id).pintar(colorActual);
+					nodosPintados[i] = colorActual;
 					cantNodosPintados++;
 				}
 			}
@@ -66,7 +62,7 @@ public class Grafo {
 
 		}
 
-		return new SalidaColoreo(this, nodosColoreados, colorActual - 1);
+		return new SalidaColoreo(this, nodosPintados, colorActual - 1);
 	}
 
 	public MatrizSimetrica getMatrizAdyacencia() {
