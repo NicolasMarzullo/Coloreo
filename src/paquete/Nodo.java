@@ -11,10 +11,18 @@ public class Nodo implements Comparable<Nodo>{
 		this.color = 0;
 		this.grado = 0;
 	}
+	
+	public Nodo(int id, int grado) {
+		this.id = id;
+		this.color = 0;
+		this.grado = grado;
+	}
 
 	public void pintar(int color) {
 		this.color = color;
 	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -1,5 +1,6 @@
 package paquete;
 
+
 import org.junit.Test;
 
 import generador.Generador;
@@ -23,22 +24,21 @@ public class TestsGrafos {
 	}
 	
 	@Test
-	public void testSecuencialExigido() {
-		Generador gen = new Regular(100,99);
+	public void testSecuencialGenerado() {
+		Generador gen = new Regular(10000,70);
 		
 		try {
 			gen.generar();
-			gen.escribirEnArchivo("grafosGenerados/g1.IN");
-			Grafo g = new Grafo("grafosGenerados/g1.IN");
+			gen.calcularParametrosDelGrafo();
+			gen.escribirEnArchivo("grafosGenerados/g1.in");
+			Grafo g = new Grafo("grafosGenerados/g1.in");
 			SalidaColoreo salida = g.colorear(g.calcularSecuencial());
 			salida.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
 	}
-	
 	
 	@Test
 	public void testMatula() {
