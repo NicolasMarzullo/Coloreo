@@ -1,6 +1,6 @@
 package paquete;
 
-
+import java.util.List;
 
 public class SalidaColoreo {
 
@@ -13,7 +13,7 @@ public class SalidaColoreo {
 		this.nodosColoreados = nodosColoreados;
 		this.cantDeColorUsuados = cantDeColorUsuados;
 	}
-
+	
 	@Override
 	public String toString() {
 		System.out.println("CANTIDAD DE COLORES USADOS: " + cantDeColorUsuados);

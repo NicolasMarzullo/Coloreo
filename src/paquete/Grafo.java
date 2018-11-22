@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -108,6 +109,39 @@ public class Grafo {
 		return new SalidaColoreo(this, nodosPintados, colorActual - 1);
 	}
 
+	public SalidaColoreoV2 colorearV2(List<Integer> secuencia) {
+		int color = 0;
+		int colorMax = 0;
+		boolean pintarConEsteColor;
+		ArrayList<Nodo> grafoColoreado = new ArrayList<>();
+
+		// Creo nuevos nodos en la secuencia solicitada
+		for (Integer i: secuencia) {
+			grafoColoreado.add(new Nodo(i));
+		}
+		
+		
+		for (Nodo n : grafoColoreado) {
+			color = 1;
+			pintarConEsteColor = false;
+
+			// Busco con qué color pintarlo
+			for (int j = 0; j < this.cantidadDeNodos; j++) {
+				if (this.matrizAdyacencia.get(n.id, j) == 1 && grafoColoreado.get(j).color == color) {
+					color++;
+				}
+			}
+
+			n.pintar(color);
+
+			if (colorMax < color) {
+				colorMax = color;
+			}
+		}
+
+		return new SalidaColoreoV2(grafoColoreado, colorMax);
+	}
+
 	public MatrizSimetrica getMatrizAdyacencia() {
 		return matrizAdyacencia;
 	}
@@ -128,32 +162,32 @@ public class Grafo {
 	public ArrayList<Integer> calcularWheelsPower() {
 		ArrayList<Integer> secuencia = new ArrayList<>();
 		ArrayList<Nodo> aux = new ArrayList<>();
-		
+
 		for (int i = 0; i < this.nodos.size(); i++) {
 			aux.add(new Nodo(i, this.nodos.get(i).grado));
 		}
-		
-		Collections.sort(aux,Collections.reverseOrder());
-		for(Nodo n: aux) {
+
+		Collections.sort(aux, Collections.reverseOrder());
+		for (Nodo n : aux) {
 			secuencia.add(n.id);
 		}
-		
+
 		return secuencia;
 	}
 
 	public ArrayList<Integer> calcularMatula() {
 		ArrayList<Integer> secuencia = new ArrayList<>();
 		ArrayList<Nodo> aux = new ArrayList<>();
-		
+
 		for (int i = 0; i < this.nodos.size(); i++) {
 			aux.add(new Nodo(i, this.nodos.get(i).grado));
 		}
-		
+
 		Collections.sort(aux);
-		for(Nodo n: aux) {
+		for (Nodo n : aux) {
 			secuencia.add(n.id);
 		}
-		
+
 		return secuencia;
 	}
 
