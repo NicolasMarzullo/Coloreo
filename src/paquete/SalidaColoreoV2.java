@@ -18,9 +18,9 @@ public class SalidaColoreoV2 {
 	public String toString() {
 		
 		System.out.println("Cantidad de colores usados: " + this.cantDeColoresUsados);
-		for(Nodo n: this.grafoColoreado) {
-			System.out.println("NODO: " + n.id + "  Color" + n.color);
-		}
+//		for(Nodo n: this.grafoColoreado) {
+//			System.out.println("NODO: " + n.id + "  Color" + n.color);
+//		}
 		
 		return null;
 	}

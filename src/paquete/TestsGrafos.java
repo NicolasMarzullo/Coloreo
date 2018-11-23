@@ -69,5 +69,33 @@ public class TestsGrafos {
 		
 	}
 	
+	@Test
+	public void testRegularDeparcial() {
+		Grafo g = new Grafo(12);
+		g.setUnion(0, 1);
+		g.setUnion(0, 5);
+		g.setUnion(1, 2);
+		g.setUnion(2, 3);
+		g.setUnion(3, 4);
+		g.setUnion(4, 5);
+		g.setUnion(0, 6);
+		g.setUnion(1, 7);
+		g.setUnion(8, 2);
+		g.setUnion(9, 3);
+		g.setUnion(4, 10);
+		g.setUnion(5, 11);
+		g.setUnion(11, 10);
+		g.setUnion(10, 9);
+		g.setUnion(9, 8);
+		g.setUnion(8, 7);
+		g.setUnion(6, 7);
+		
+		
+		SalidaColoreo salida = g.colorear(g.calcularSecuencial());
+		
+		salida.toString();
+		
+	}
+	
 	
 }

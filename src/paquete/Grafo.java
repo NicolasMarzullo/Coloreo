@@ -127,7 +127,8 @@ public class Grafo {
 
 			// Busco con qué color pintarlo
 			for (int j = 0; j < this.cantidadDeNodos; j++) {
-				if (this.matrizAdyacencia.get(n.id, j) == 1 && grafoColoreado.get(j).color == color) {
+				if (this.matrizAdyacencia.get(n.id, j) == 1 && grafoColoreado.get(j).color == color
+						&& grafoColoreado.get(j).color != 0) {
 					color++;
 				}
 			}
